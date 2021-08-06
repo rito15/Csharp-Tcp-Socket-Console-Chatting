@@ -14,7 +14,7 @@ namespace Client
     {
         public string Name { get; set; }
 
-        private ChattingClientSession _session;
+        private ChattingServerSession _session;
         private bool _isRunning;
 
         /// <summary> "잘못된 명령어를 입력하셨습니다." </summary>
@@ -25,7 +25,7 @@ namespace Client
         ***********************************************************************/
         #region .
         /// <summary> 채팅 클라이언트 동작 시작 </summary>
-        public void Run(ChattingClientSession session)
+        public void Run(ChattingServerSession session)
         {
             _session = session;
             _isRunning = true;

@@ -18,7 +18,7 @@ namespace Server
         private static readonly ChattingManager _instance = new ChattingManager();
         private ChattingManager() { } // 생성자 봉인
 
-        public HashSet<ChattingServerSession> ClientSessionList { get; } = new HashSet<ChattingServerSession>(4);
+        public HashSet<ChattingClientSession> ClientSessionList { get; } = new HashSet<ChattingClientSession>(4);
         private readonly object _lock = new object();
 
         /***********************************************************************
@@ -26,7 +26,7 @@ namespace Server
         ***********************************************************************/
         #region .
         /// <summary> 클라이언트로부터 전달받은 패킷 데이터 처리 </summary>
-        public void HandleDataFromClient(ChattingServerSession clientSession, in ChattingPacketData data)
+        public void HandleDataFromClient(ChattingClientSession clientSession, in ChattingPacketData data)
         {
             Console.Write(Utility.GetTimeStamp() + " ");
 
@@ -61,7 +61,7 @@ namespace Server
         ***********************************************************************/
         #region .
         /// <summary> 새로운 클라이언트를 목록에 추가 </summary>
-        private void AddClient(ChattingServerSession clientSession, string name)
+        private void AddClient(ChattingClientSession clientSession, string name)
         {
             bool addSucceeded;
 
@@ -83,7 +83,7 @@ namespace Server
         }
 
         /// <summary> 목록에서 클라이언트 제거 </summary>
-        public void RemoveClient(ChattingServerSession clientSession)
+        public void RemoveClient(ChattingClientSession clientSession)
         {
             // 1. 목록에서 제거
             lock (_lock)
@@ -104,7 +104,7 @@ namespace Server
         }
 
         /// <summary> 지정한 클라이언트의 이름 변경 </summary>
-        private void RenameClient(ChattingServerSession clientSession, string newName)
+        private void RenameClient(ChattingClientSession clientSession, string newName)
         {
             // 1. "기존이름|새로운이름" 꼴로 내용 구성
             string renameContent = $"{clientSession.ClientName}|{newName}";
@@ -118,7 +118,7 @@ namespace Server
         }
 
         /// <summary> 해당 클라이언트를 제외한 모두에게 채팅 메시지 전달 </summary>
-        private void RelayChattingMessage(ChattingServerSession clientSession, string message)
+        private void RelayChattingMessage(ChattingClientSession clientSession, string message)
         {
             if (ClientSessionList.Count > 1)
             {

@@ -11,7 +11,7 @@ namespace Server
 {
     using ByteSegment = System.ArraySegment<byte>;
 
-    class ChattingServerSession : Session
+    class ChattingClientSession : Session
     {
         private ChattingManager _chatManager;
         public string ClientName { get; set; }

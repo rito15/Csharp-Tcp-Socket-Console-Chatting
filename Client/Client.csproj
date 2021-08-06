@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="ChattingClient.cs" />
     <Compile Include="ClientProgram.cs" />
-    <Compile Include="ChattingClientSession.cs" />
+    <Compile Include="ChattingServerSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

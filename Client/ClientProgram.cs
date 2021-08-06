@@ -18,7 +18,7 @@ namespace Client
             IPInformation ipInfo = new IPInformation(Dns.GetHostName(), 12345);
             Connector connector = new Connector();
 
-            connector.Connect(ipInfo.EndPoint, () => new ChattingClientSession());
+            connector.Connect(ipInfo.EndPoint, () => new ChattingServerSession());
 
             while (true) ;
         }
